@@ -1,0 +1,33 @@
+﻿@model ServitalleresWeb.Models.User
+@{
+    ViewData["Title"] = "Login";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/LoginStyles.css" />
+</head>
+
+
+<div class="center">
+    <h1>Iniciar Sesión</h1>
+    <form method="post">
+        <div class="txt_field">
+            <input class="input_text" asp-for="Username" type="text" placeholder="Nombre de Usuario"/>
+            <span class="span"></span>
+            @*<label class="label">Username</label>*@
+        </div>
+        <div class="txt_field">
+            <input class="input_text" type="password" asp-for="Password" placeholder="Clave" />
+            <span class="span"></span>
+            @*<label class="label">Password</label>*@
+        </div>
+        <div class="pass">¿Olvido su clave?</div>
+        <button class="submit_button" type="submit" value="Submit">Ingresar</button>
+        <div class="signup_link">
+            ¿Aún no está registrado?
+            <a asp-controller="Home" asp-action="Register">Registrar</a>
+        </div>
+        
+    </form>
+
+</div>

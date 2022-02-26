@@ -1,0 +1,28 @@
+﻿@model ServitalleresWeb.Models.User
+
+
+<head>
+    <link rel="stylesheet" href="~/css/RegisterStyles.css" />
+</head>
+
+
+<div class="center">
+    <h1>Crear Cuenta</h1>
+    <form method="post">
+        <div class="txt_field">
+            <input class="input_text" asp-for="Username" type="text" placeholder="Ingrese un nombre de usuario" />
+            <span class="span"></span>
+        </div>
+        <div class="txt_field">
+            <input class="input_text" asp-for="Password" type="text" placeholder="Clave" />
+            <span class="span"></span>
+        </div>
+        <button class="submit_button" type="submit" value="Submit">Registrar</button>
+        <div class="signup_link">
+            ¿Ya está registrado?
+            <a asp-controller="Home" asp-action="Login">Ingresar</a>
+        </div>
+
+    </form>
+
+</div>

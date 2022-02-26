@@ -1,0 +1,512 @@
+﻿@using ServitalleresWeb.Models.Enums
+@using Microsoft.AspNetCore.Http.Features
+@using ServitallersWeb.Models.Enums
+@model ServitalleresWeb.Models.Client
+
+@{
+    var title = "Perfil Cliente";
+
+    //if (Model.ClientType == ClientType.Natural)
+    //{
+    //    var clientType = "Persona Natural";
+    //}
+    //else
+    //{
+    //    var clientType = "Persona Juridica";
+    //}
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/Styles.css" />
+    <link rel="stylesheet" href="~/css/StylesClients.css" />
+</head>
+
+
+@* Sidebar Menu*@
+
+<div class="sidebar">
+    <div class="logo-details">
+        <i class='bx bxs-car-garage'></i>
+        <span class="logo_name">Servi<span class="logo_name_2">Talleres</span></span>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <i class='bx bxs-grid-alt'></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bxs-car-mechanic'></i>
+                    <span class="link_name">Taller</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Taller</a></li>
+                <li><a href="#">Abrir Nuevo O.T.</a></li>
+                <li><a href="#">Consultar O.T.</a></li>
+                <li><a href="#">Proceso P.I.R.</a></li>
+                <li><a href="#">Cargar Servicio - M/O</a></li>
+                <li><a href="#">Cargar Items</a></li>
+                <li><a href="#">Reversar Items</a></li>
+                <li><a href="#">Cerrar/Re Abrir O.T.</a></li>
+                <li><a href="#">Facturas Taller</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-cart'></i>
+                    <span class="link_name">Compras</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Compras</a></li>
+                <li><a href="#">Orden de Compra/Back Order</a></li>
+                <li><a href="#">Compra de Productos</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-briefcase'></i>
+                    <span class="link_name">Ventas</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Ventas</a></li>
+                <li><a href="#">Cotización Venta</a></li>
+                <li><a href="#">Venta Directa</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-buildings'></i>
+                    <span class="link_name">Inventario</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Inventario</a></li>
+                <li><a href="#">Productos/Items</a></li>
+                <li><a href="#">Servicios/Mano de Obra</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-group'></i>
+                    <span class="link_name">Terceros</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Terceros</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Empleados</a></li>
+                <li><a asp-controller="Clients" asp-action="Index">Clientes</a></li>
+                <li><a href="#">Proveedores</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-spreadsheet'></i>
+                    <span class="link_name">Contabilidad</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Contabilidad</a></li>
+                <li><a href="#">PUC</a></li>
+                <li><a href="#">Impuestos/Retenciones</a></li>
+                <li><a href="#">Clientes</a></li>
+                <li><a href="#">Proveedores</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-line-chart'></i>
+                    <span class="link_name">Administración</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Administración</a></li>
+                <li><a href="#">Recibo de Caja</a></li>
+                <li><a href="#">Nota Debito</a></li>
+                <li><a href="#">Nota Credito</a></li>
+                <li><a href="#">Comprobante de Egreso</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bx-spreadsheet'></i>
+                    <span class="link_name">Informes</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Informes</a></li>
+                <li><a href="#">Recibo de Caja</a></li>
+                <li><a href="#">Nota Debito</a></li>
+                <li><a href="#">Nota Credito</a></li>
+                <li><a href="#">Comprobante de Egreso</a></li>
+                <li><a href="#">Contables</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="icon-link">
+                <a href="#">
+                    <i class='bx bxs-car'></i>
+                    <span class="link_name">Marcas Modelos</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+
+                <li><a class="link_name">Marcas Modelos</a></li>
+                <li><a asp-area="" asp-controller="VehicleBrands" asp-action="Index">Vehículos</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-cog'></i>
+                <span class="link_name">Ajustes</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Ajustes</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="profile-details">
+                <div class="profile-content">
+                    <img src="~/img/profile.jpg" alt="profilePic" />
+                </div>
+                <div class="name-job">
+                    <div class="profile_name">Daniel Gonzalez</div>
+                    <div class="job">@ViewBag.Name</div>
+                </div>
+                <a asp-controller="Home" asp-action="Logout"><i class='bx bx-log-out'></i></a>
+            </div>
+        </li>
+    </ul>
+</div>
+<section class="home-section">
+    <div class="home-content">
+        <i class='bx bx-menu'></i>
+        <span class="text">Menú</span>
+    </div>
+</section>
+
+
+<form>
+
+    <div class="row mt-5 offset-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-12 mb-5">
+            <h2 class="text">@title</h2>
+        </div>
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Tipo de Cliente</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="ClientType" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            @if (Model.TypeOfIdentification == TypeOfIdentification.CedulaDeCiudadania)
+            {
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>Tipo de Identificación</label>
+                    </div>
+                    <div class="col-8">
+                        <input disabled value="Cedula de Ciudadania" asp-for="TypeOfIdentification" />
+                    </div>
+                    <div style="margin-left: 220px;">
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+            }
+            else if (Model.TypeOfIdentification == TypeOfIdentification.Pasaporte)
+            {
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>Tipo de Identificación</label>
+                    </div>
+                    <div class="col-8">
+                        <input disabled value="Pasaporte" asp-for="TypeOfIdentification" />
+                    </div>
+                    <div style="margin-left: 220px;">
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+            }
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Número de Identificación</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="NumberOfIdentification" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Primer Nombre</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="FirstName" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Segundo Nombre</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="SecondName" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Primer Apellido</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="FirstLastName" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Segundo Apellido</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="SecondLastName" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Teléfono</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="TelephoneNumber" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Número Celular</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="MobileNumber" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Email</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="Email" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Página Web</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="Website" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Dirección</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="Address" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Ciudad</label>
+                </div>
+                <div class="col-8">
+                    <input disabled  asp-for="CityId"/>
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Persona de Contacto</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="ContactName" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Teléfono de Contacto 1</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="ContactPhone" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Teléfono de Contacto 2</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="ContactPhone2" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Crédito</label>
+                </div>
+                <div class="col-8">
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="Credit" class="form-check-input" type="radio" name="creditOption" id="creditRadio" value="true">
+                        <label class="form-check-label" for="creditRadio">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="Credit" class="form-check-input" type="radio" name="creditOption" id="creditRadio" value="false">
+                        <label class="form-check-label" for="creditRadio">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Saldo de Crédito</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="CreditAmount" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Días de Crédito</label>
+                </div>
+                <div class="col-8">
+                    <input disabled asp-for="DaysCredit" />
+                </div>
+                <div style="margin-left: 220px;">
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Declarante</label>
+                </div>
+                <div class="col-8">
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="Declarant" class="form-check-input" type="radio" name="declarantOption" id="declarantRadio" value="true">
+                        <label class="form-check-label" for="declarantRadio">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="Declarant" class="form-check-input" type="radio" name="declarantOption" id="declarantRadio" value="false">
+                        <label class="form-check-label" for="declarantRadio">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Retefuente</label>
+                </div>
+                <div class="col-8">
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="ReteFuente" class="form-check-input" type="radio" name="retefuenteOption" id="retefuenteRadio" value="1">
+                        <label class="form-check-label" for="retefuenteRadio">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="ReteFuente" class="form-check-input" type="radio" name="retefuenteOption" id="retefuenteRadio" value="0">
+                        <label class="form-check-label" for="retefuenteRadio">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Reteiva</label>
+                </div>
+                <div class="col-8">
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="ReteIva" class="form-check-input" type="radio" name="reteivaOption" id="reteivaRadio" value="1">
+                        <label class="form-check-label" for="reteivaRadio">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input disabled="" asp-for="ReteIva" class="form-check-input" type="radio" name="reteivaOption" id="reteivaRadio" value="0">
+                        <label class="form-check-label" for="reteivaRadio">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <a asp-action="Index" class="btn form-control my_create_button text-white">Volver a Clientes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts
+{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

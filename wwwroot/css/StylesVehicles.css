@@ -1,0 +1,27 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+}
+
+.container {
+    margin-left: 0px;
+    margin-right: 50px;
+    max-width: 90%;
+}
+
+.my_create_button {
+    background-color: #11101d;
+    cursor: pointer;
+}
+
+.my_create_button:hover {
+    background: #94949c;
+}
+
+
+
+
